@@ -14,6 +14,8 @@ def actual_cost(run_dir: Path, prices: dict) -> dict:
         if path.exists():
             try: usage.update(read_json(path).get("usage", read_json(path)))
             except Exception: pass
+    if not any(key in usage for key in ("input_tokens", "prompt_tokens", "output_tokens", "completion_tokens")):
+        raise RuntimeError("usage missing; refusing to assign a zero cost")
     inp = int(usage.get("input_tokens", usage.get("prompt_tokens", 0)) or 0)
     cached = int(usage.get("cached_input_tokens", 0) or 0)
     out = int(usage.get("output_tokens", usage.get("completion_tokens", 0)) or 0)
@@ -71,7 +73,12 @@ def main() -> None:
         raise SystemExit("Refusing to run:\n- " + "\n- ".join(errors))
     pricing = read_json(ROOT / "configs" / "pricing_snapshot.json")
     schedule = []
-    for task_id in pre["tasks"]:
+    selected = list(pre["tasks"])
+    if args.phase in {"confirmation", "cross_model"}:
+        candidates = read_json(ROOT / "reports" / "candidate_gates.json").get("selected_candidates", []) if (ROOT / "reports" / "candidate_gates.json").exists() else []
+        selected = [c["task_id"] for c in candidates]
+        if not selected: raise SystemExit("No preregistered candidate selection exists for this phase.")
+    for task_id in selected:
         for condition, rep in itertools.product(CONDITIONS, range(1, phase_spec["repetitions"] + 1)):
             schedule.append({"task_id": task_id, "condition": condition, "rep": rep})
     random.Random(config["random_seed"] + sum(map(ord, args.phase))).shuffle(schedule)
@@ -123,6 +130,7 @@ def main() -> None:
         except subprocess.TimeoutExpired as exc:
             (run_dir / "stdout.log").write_text(exc.stdout or "", encoding="utf-8"); (run_dir / "stderr.log").write_text((exc.stderr or "") + "\nTIMEOUT", encoding="utf-8")
             metadata.update({"timestamp_end": now(), "infra_valid": True, "failure_reason": "agent_timeout", "failure_class": "AGENT_FAILURE"})
+            metadata.update(actual_cost(run_dir, pricing["models"][model]))
         write_json(run_dir / "metadata.json", metadata)
         print(f"[{ordinal}/{len(schedule)}] {run_id}")
 

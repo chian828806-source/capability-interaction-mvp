@@ -6,8 +6,8 @@
 - No-skill isolation, including Docker bind-mount check: PASS
 - WSL environment manifest: PASS
 - Same-day pricing snapshot: BLOCKED (required only immediately before an API run)
-- Experiment configuration hash: `af64a53c55152bd33ae7f531529ecfeb08389b33927fb7fe90329f88f7462e97`
-- Final preregistration hash: `66ebed279f5aa278ba21fc94eff9729bba77a00d9e2cd7e64da49af1fe5f689b`
+- Experiment configuration hash: `26ee75a1580a130563335d402725a17adb916e5104e1783900712471f57a38bf`
+- Final preregistration hash: `c74830edc6c58166c41db8ca4d2cc48585e08f5c3e0838735bd1c96febb6ddc4`
 
 ## Frozen API Pilot
 

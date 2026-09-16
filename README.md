@@ -12,8 +12,8 @@ verifier have been qualified for two replacement tasks.
   verifier 12/12 on each run.
 - Task 2: `hvac-control` — three fresh oracle rewards of `1.0`; verifier 7/7
   on each run.
-- Frozen task-pair configuration: `preregistration_v2.yaml`, SHA-256 in
-  `PREREGISTRATION_HASH_V2.txt`.
+- Frozen task-pair configuration: `preregistration_final.yaml`, SHA-256 in
+  `PREREGISTRATION_FINAL_HASH.txt`.
 
 The retired BugSwarm tasks are recorded as semantic external-dependency
 failures. Runtime package installation is classified separately as a bootstrap

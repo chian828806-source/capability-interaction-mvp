@@ -7,5 +7,5 @@
   "benchflow_version": "0.6.7",
   "reasoning_setting": "low",
   "required_env": ["API_BASE_URL", "API_KEY"],
-  "phases": {"pilot": {"repetitions": 1, "model_key": "pilot"}, "screening": {"repetitions": 3, "model_key": "primary"}, "confirmation": {"repetitions": 7, "model_key": "primary"}, "cross_model": {"repetitions": 5, "model_key": "secondary"}}
+  "phases": {"pilot": {"repetitions": 1, "model_key": "pilot", "runs": 8}, "screening": {"repetitions": 3, "model_key": "primary", "runs": 24}, "confirmation": {"repetitions": 7, "model_key": "primary", "selection": "candidate_gates.json only"}, "cross_model": {"repetitions": 5, "model_key": "secondary", "selection": "confirmed candidate only"}, "controls": {"trigger": "each selected screening candidate", "matched_irrelevant_skill": "one equal-format unrelated skill", "generic_prompt_burden": "one equal-length generic reference prompt", "repetitions": 3}}
 }

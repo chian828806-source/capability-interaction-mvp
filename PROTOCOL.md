@@ -21,8 +21,14 @@ formal configurations are hashed before model execution.
 
 ## Documented compatibility deviation
 
-The supplied protocol specifies BenchFlow `>=0.6.4,<0.7`.  The official
-SkillsBench v1.1 release currently documents `>=0.6.3,<0.7`.  The stricter
-protocol range is retained in `configs/experiment.yaml`; if an available
-install cannot meet it, record the exact version and a rationale in
-`PROTOCOL_DEVIATIONS.md` before any paid run.
+The final frozen configuration is `preregistration_final.yaml` and
+`PREREGISTRATION_FINAL_HASH.txt`. BenchFlow is pinned to `0.6.7`; no legacy
+version range or retired BugSwarm task is an execution input.
+
+Agent limits (`agent_timeout`, `max_steps`, `max_api_calls`) are valid agent
+failures and count as verifier FAIL even if no verifier output exists. Docker,
+provider/API, and verifier-bootstrap faults are invalid infrastructure runs.
+Every valid run must retain token usage and `actual_cost_usd`; missing usage
+fails closed. Pilot is 8 runs, Screening is 24 runs, and Confirmation/
+Cross-model are restricted to the preregistered selected candidate, including
+the matched irrelevant-skill and generic prompt-burden controls.

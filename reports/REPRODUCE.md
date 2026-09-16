@@ -9,7 +9,7 @@ python scripts/scan_task_candidates.py
 ```
 
 Confirm the inventory has 87 rows and verify the frozen task selection in
-`preregistration_v2.yaml` against `PREREGISTRATION_HASH_V2.txt`. See
+`preregistration_final.yaml` against `PREREGISTRATION_FINAL_HASH.txt`. See
 `reports/TASK_REPLACEMENT_AUDIT.md` for the three fresh oracle results per
 qualified task.
 
