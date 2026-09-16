@@ -2,7 +2,7 @@
 from __future__ import annotations
 import csv, json
 from pathlib import Path
-from common import ROOT, atomic_csv, now
+from common import ROOT, atomic_csv, now, read_json
 
 FIELDS = ["run_id", "timestamp_start", "timestamp_end", "phase", "task_id", "skill_condition", "model_provider", "requested_model", "returned_model", "reasoning_setting", "verifier_result", "verifier_score", "valid", "infra_valid", "failure_reason", "failure_class", "input_tokens", "cached_input_tokens", "output_tokens", "reasoning_tokens", "number_of_api_calls", "retry_count", "actual_cost_usd", "estimated_cost_usd", "wall_clock_time", "tool_calls", "skill_A_available", "skill_B_available", "skill_A_loaded", "skill_B_loaded", "skill_load_order", "files_changed"]
 
@@ -24,7 +24,8 @@ def main() -> None:
     for run_dir in sorted(p for p in (ROOT / "runs" / "raw").iterdir() if p.is_dir()):
         meta_path = run_dir / "metadata.json"
         if not meta_path.exists(): continue
-        meta = json.loads(meta_path.read_text(encoding="utf-8")); verdict = verifier_result(run_dir, meta)
+        meta = json.loads(meta_path.read_text(encoding="utf-8")); result=read_json(run_dir/"result.json") if (run_dir/"result.json").exists() else {}; usage=read_json(run_dir/"usage.json") if (run_dir/"usage.json").exists() else {}; calls=read_json(run_dir/"tool_calls.json") if (run_dir/"tool_calls.json").exists() else []
+        meta={**meta,**result,**usage,"tool_calls":len(calls)}; verdict = verifier_result(run_dir, meta)
         infra = meta.get("infra_valid")
         if meta.get("failure_class") == "AGENT_FAILURE": verdict = "FAIL"
         if infra and meta.get("actual_cost_usd") is None:

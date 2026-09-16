@@ -10,6 +10,7 @@
   },
   "gates": {"pilot_repetitions": 1, "screening_repetitions": 3, "confirmation_repetitions": 7, "cross_model_repetitions": 5, "candidate_main_effect": 0.2, "candidate_ab_drop": 0.2, "candidate_p_negative": 0.9},
   "candidate_resolution": {"multiple_candidates": "rank by preregistered negative contrast, then lower AB pass rate, then task_id lexicographically; retain only the top candidate for confirmation", "confirmation_scope": "selected candidate task/pair only", "cross_model_scope": "confirmed candidate task/pair only", "controls": {"trigger": "each selected screening candidate", "matched_irrelevant_skill": "one unrelated skill matched for source format and approximate prompt length", "generic_prompt_burden": "one generic prompt matched to the combined-skill prompt burden", "repetitions": 3, "primary_outcome": "same verifier pass/fail"}},
-  "status": "READY_FOR_API_PILOT",
+  "runner": {"path": "scripts/run_agent.py", "smoke_test": "scripts/api_smoke_test.py", "smoke_test_label": "NON_EXPERIMENTAL_API_SMOKE_TEST", "required_artifacts": ["trajectory.json", "result.json", "usage.json", "tool_calls.json", "verifier.log", "stdout.log", "stderr.log", "metadata.json"]},
+  "status": "READY_FOR_API_SMOKE_TEST",
   "paid_model_or_api_runs_started": false
 }

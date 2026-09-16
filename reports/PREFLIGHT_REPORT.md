@@ -6,15 +6,15 @@
 - No-skill isolation, including Docker bind-mount check: PASS
 - WSL environment manifest: PASS
 - Same-day pricing snapshot: BLOCKED (required only immediately before an API run)
-- Experiment configuration hash: `26ee75a1580a130563335d402725a17adb916e5104e1783900712471f57a38bf`
-- Final preregistration hash: `c74830edc6c58166c41db8ca4d2cc48585e08f5c3e0838735bd1c96febb6ddc4`
+- Experiment configuration hash: `3075b01f3d7cbcc70c5250bef2168caf1c4e99632b55cbd746b2da6ad9cab2da`
+- Final preregistration hash: `1a69ffa7860775e062f5521cf63998151b3adb1797ff9da9feb700e04113275f`
 
 ## Frozen API Pilot
 
 - Tasks: `adaptive-cruise-control`, `hvac-control`
 - Plan: `2 Tasks × 4 Conditions × 1 repetition = 8 Pilot runs`
 - Budget hard stop: `$15.00`
-- Status: `READY_FOR_API_PILOT`
+- Status: `READY_FOR_API_SMOKE_TEST`
 
 ## Task audits
 

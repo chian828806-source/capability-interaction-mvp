@@ -1,6 +1,6 @@
 """Guarded phase runner. It never invents outcomes or silently changes models."""
 from __future__ import annotations
-import argparse, itertools, os, random, shlex, statistics, subprocess
+import argparse, itertools, os, random, shlex, statistics, subprocess, sys
 from pathlib import Path
 from common import FINAL_PREREGISTRATION, ROOT, atomic_csv, now, read_json, sha256_file, write_json
 
@@ -39,8 +39,6 @@ def prerequisite_errors(phase: str, model: str, dry_run: bool = False) -> list[s
             errors.append(f"task {task} has no passing qualification audit")
     if not dry_run and (not os.environ.get("API_KEY") or not os.environ.get("API_BASE_URL")):
         errors.append("API_KEY and API_BASE_URL must be environment variables")
-    if not dry_run and not os.environ.get("MVP_RUNNER_TEMPLATE"):
-        errors.append("MVP_RUNNER_TEMPLATE is required and must specify the fixed provider-agnostic harness")
     gates_path = ROOT / "reports" / "phase_gates.json"
     gates = read_json(gates_path) if gates_path.exists() else {}
     required_gate = {"screening": "pilot_passed", "confirmation": "negative_candidate", "cross_model": "confirmed_candidate"}.get(phase)
@@ -100,19 +98,16 @@ def main() -> None:
     if args.dry_run:
         write_json(ROOT / "configs" / "budget_snapshot.json", budget_snapshot(historical_costs, len(schedule), 0.0))
         print(f"Dry run: frozen {len(schedule)} runs for {args.phase}; no API call made."); return
-    template = os.environ["MVP_RUNNER_TEMPLATE"]
     for ordinal, run in enumerate(schedule, 1):
         run_id = f"{run['task_id']}__{model}__{run['condition']}__{run['rep']}"
         run_dir = ROOT / "runs" / "raw" / run_id; run_dir.mkdir(parents=True, exist_ok=False)
-        values = {"task_dir": str(ROOT / "sanitized_tasks" / run["task_id"]), "skills_dir": str(ROOT / "conditions" / run["task_id"] / run["condition"]),
-                  "condition": run["condition"], "model": model, "run_dir": str(run_dir), "seed": str(config["random_seed"] + ordinal)}
-        cmd = template.format(**values)
         metadata = {"run_id": run_id, "timestamp_start": now(), "phase": args.phase, "task_id": run["task_id"], "skill_condition": run["condition"],
                     "model_provider": config["provider"], "requested_model": model, "reasoning_setting": config["reasoning_setting"], "infra_valid": None,
-                    "runner_command": cmd, "run_schedule_order": ordinal}
+                    "runner_command": "scripts/run_agent.py", "run_schedule_order": ordinal}
         write_json(run_dir / "metadata.json", metadata)
         try:
-            proc = subprocess.run(cmd, shell=True, cwd=ROOT, text=True, capture_output=True, timeout=config["execution_guards"]["max_wall_time_per_run_seconds"])
+            cmd = [sys.executable, str(ROOT/"scripts"/"run_agent.py"), "--task", str(ROOT/"sanitized_tasks"/run["task_id"]), "--skills", str(ROOT/"conditions"/run["task_id"]/run["condition"]), "--condition",run["condition"],"--model",model,"--run-dir",str(run_dir),"--pricing",str(ROOT/"configs"/"pricing_snapshot.json")]
+            proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, timeout=config["execution_guards"]["max_wall_time_per_run_seconds"])
             (run_dir / "stdout.log").write_text(proc.stdout, encoding="utf-8"); (run_dir / "stderr.log").write_text(proc.stderr, encoding="utf-8")
             text = (proc.stdout + "\n" + proc.stderr).lower()
             agent_failure = any(x in text for x in ("agent_timeout", "max_steps", "max_api_calls"))

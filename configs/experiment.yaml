@@ -1,7 +1,7 @@
 {
   "max_api_budget_usd": 15.0,
   "execution_guards": {"max_agent_steps": 40, "max_api_calls_per_run": 25, "max_input_tokens_per_call": 16384, "max_output_tokens_per_call": 4096, "max_wall_time_per_run_seconds": 1800, "max_retry_per_call": 2},
-  "harness": {"name": "opencode", "web_access": "disabled", "runner_template_env": "MVP_RUNNER_TEMPLATE", "template_variables": ["{task_dir}", "{skills_dir}", "{condition}", "{model}", "{run_dir}", "{seed}"]},
+  "harness": {"name": "scripts/run_agent.py", "web_access": "disabled", "api_env": ["API_BASE_URL", "API_KEY", "PILOT_MODEL"], "artifacts": ["trajectory.json", "result.json", "usage.json", "tool_calls.json", "verifier.log", "stdout.log", "stderr.log", "metadata.json"]},
   "random_seed": 20260915,
   "provider": "302.AI",
   "benchflow_version": "0.6.7",
