@@ -1,0 +1,14 @@
+{
+  "protocol_version": "mvp-1.0-pre-api-final",
+  "benchmark": {"repository": "https://github.com/benchflow-ai/skillsbench.git", "tag": "v1.1", "commit": "b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af", "benchflow": "==0.6.7"},
+  "models": {"pilot": "gpt-5.4-nano-2026-03-17", "primary": "gpt-5.4-mini-2026-03-17", "secondary": "gemini-3.8-flash"},
+  "budget_usd": 15.0,
+  "conditions": ["ZERO", "A", "B", "AB"],
+  "tasks": {
+    "adaptive-cruise-control": {"skills": ["vehicle-dynamics", "pid-controller"], "oracle_rewards": [1.0, 1.0, 1.0], "verifier_tests_per_run": 12},
+    "hvac-control": {"skills": ["first-order-model-fitting", "imc-tuning-rules"], "oracle_rewards": [1.0, 1.0, 1.0], "verifier_tests_per_run": 7}
+  },
+  "gates": {"pilot_repetitions": 1, "screening_repetitions": 3, "confirmation_repetitions": 7, "cross_model_repetitions": 5, "candidate_main_effect": 0.2, "candidate_ab_drop": 0.2, "candidate_p_negative": 0.9},
+  "status": "READY_FOR_API_PILOT",
+  "paid_model_or_api_runs_started": false
+}

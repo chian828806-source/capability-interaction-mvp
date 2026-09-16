@@ -1,0 +1,9 @@
+phase,order,task_id,condition,rep,model
+pilot,1,adaptive-cruise-control,AB,1,gpt-5.4-nano-2026-03-17
+pilot,2,hvac-control,A,1,gpt-5.4-nano-2026-03-17
+pilot,3,adaptive-cruise-control,A,1,gpt-5.4-nano-2026-03-17
+pilot,4,hvac-control,AB,1,gpt-5.4-nano-2026-03-17
+pilot,5,adaptive-cruise-control,ZERO,1,gpt-5.4-nano-2026-03-17
+pilot,6,hvac-control,B,1,gpt-5.4-nano-2026-03-17
+pilot,7,hvac-control,ZERO,1,gpt-5.4-nano-2026-03-17
+pilot,8,adaptive-cruise-control,B,1,gpt-5.4-nano-2026-03-17

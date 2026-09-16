@@ -1,0 +1,49 @@
+{
+  "phase": "pilot",
+  "timestamp": "2026-09-16T06:56:28.188443+00:00",
+  "config_sha256": "af64a53c55152bd33ae7f531529ecfeb08389b33927fb7fe90329f88f7462e97",
+  "preregistration_sha256": "66ebed279f5aa278ba21fc94eff9729bba77a00d9e2cd7e64da49af1fe5f689b",
+  "model": "gpt-5.4-nano-2026-03-17",
+  "schedule": [
+    {
+      "task_id": "adaptive-cruise-control",
+      "condition": "AB",
+      "rep": 1
+    },
+    {
+      "task_id": "hvac-control",
+      "condition": "A",
+      "rep": 1
+    },
+    {
+      "task_id": "adaptive-cruise-control",
+      "condition": "A",
+      "rep": 1
+    },
+    {
+      "task_id": "hvac-control",
+      "condition": "AB",
+      "rep": 1
+    },
+    {
+      "task_id": "adaptive-cruise-control",
+      "condition": "ZERO",
+      "rep": 1
+    },
+    {
+      "task_id": "hvac-control",
+      "condition": "B",
+      "rep": 1
+    },
+    {
+      "task_id": "hvac-control",
+      "condition": "ZERO",
+      "rep": 1
+    },
+    {
+      "task_id": "adaptive-cruise-control",
+      "condition": "B",
+      "rep": 1
+    }
+  ]
+}

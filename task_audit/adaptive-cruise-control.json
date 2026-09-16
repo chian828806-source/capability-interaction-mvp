@@ -1,0 +1,14 @@
+{
+  "task_id": "adaptive-cruise-control",
+  "eligible": true,
+  "dependency_class": "BOOTSTRAP_DEPENDENCY",
+  "semantic_external_dependency": false,
+  "no_skill_oracle_configuration": {"skill_mode": "no-skill", "include_task_skills": false},
+  "oracle_runs": [
+    {"run": 1, "reward": 1.0, "verifier_tests_passed": 12, "verifier_tests_total": 12},
+    {"run": 2, "reward": 1.0, "verifier_tests_passed": 12, "verifier_tests_total": 12},
+    {"run": 3, "reward": 1.0, "verifier_tests_passed": 12, "verifier_tests_total": 12}
+  ],
+  "source_commit": "b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af",
+  "benchflow": "0.6.7"
+}
