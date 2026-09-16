@@ -1,0 +1,21 @@
+{
+  "selected_candidates": [],
+  "all_candidates": [],
+  "gates": {
+    "candidate_main_effect": 0.2,
+    "candidate_ab_drop": 0.2,
+    "candidate_p_negative": 0.9
+  },
+  "rule": {
+    "multiple_candidates": "rank by preregistered negative contrast, then lower AB pass rate, then task_id lexicographically; retain only the top candidate for confirmation",
+    "confirmation_scope": "selected candidate task/pair only",
+    "cross_model_scope": "confirmed candidate task/pair only",
+    "controls": {
+      "trigger": "each selected screening candidate",
+      "matched_irrelevant_skill": "one unrelated skill matched for source format and approximate prompt length",
+      "generic_prompt_burden": "one generic prompt matched to the combined-skill prompt burden",
+      "repetitions": 3,
+      "primary_outcome": "same verifier pass/fail"
+    }
+  }
+}

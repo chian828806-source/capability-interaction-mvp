@@ -14,11 +14,18 @@ def actual_cost(run_dir: Path, prices: dict) -> dict:
         if path.exists():
             try: usage.update(read_json(path).get("usage", read_json(path)))
             except Exception: pass
-    if not any(key in usage for key in ("input_tokens", "prompt_tokens", "output_tokens", "completion_tokens")):
+    if not all(key in usage and usage[key] is not None for key in ("input_tokens", "cached_input_tokens", "output_tokens")):
         raise RuntimeError("usage missing; refusing to assign a zero cost")
-    inp = int(usage.get("input_tokens", usage.get("prompt_tokens", 0)) or 0)
-    cached = int(usage.get("cached_input_tokens", 0) or 0)
-    out = int(usage.get("output_tokens", usage.get("completion_tokens", 0)) or 0)
+    inp = int(usage["input_tokens"])
+    cached = int(usage["cached_input_tokens"])
+    out = int(usage["output_tokens"])
+    if cached > inp:
+        raise RuntimeError("cached input tokens exceed input tokens")
+    if usage.get("actual_cost_usd") is not None:
+        return {"input_tokens": inp, "cached_input_tokens": cached, "output_tokens": out,
+                "actual_cost_usd": float(usage["actual_cost_usd"])}
+    if any(prices.get(key) is None for key in ("input_price_per_1M", "output_price_per_1M")):
+        raise RuntimeError("cost missing and pricing unavailable; refusing to assign a zero cost")
     total = (inp - cached) * float(prices["input_price_per_1M"]) / 1_000_000
     total += cached * float(prices.get("cached_input_price_per_1M") or prices["input_price_per_1M"]) / 1_000_000
     total += out * float(prices["output_price_per_1M"]) / 1_000_000
