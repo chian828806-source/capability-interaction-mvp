@@ -104,7 +104,6 @@ def main() -> None:
         metadata = {"run_id": run_id, "timestamp_start": now(), "phase": args.phase, "task_id": run["task_id"], "skill_condition": run["condition"],
                     "model_provider": config["provider"], "requested_model": model, "reasoning_setting": config["reasoning_setting"], "infra_valid": None,
                     "runner_command": "scripts/run_agent.py", "run_schedule_order": ordinal}
-        write_json(run_dir / "metadata.json", metadata)
         try:
             cmd = [sys.executable, str(ROOT/"scripts"/"run_agent.py"), "--task", str(ROOT/"sanitized_tasks"/run["task_id"]), "--skills", str(ROOT/"conditions"/run["task_id"]/run["condition"]), "--condition",run["condition"],"--model",model,"--run-dir",str(run_dir),"--pricing",str(ROOT/"configs"/"pricing_snapshot.json")]
             proc = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, timeout=config["execution_guards"]["max_wall_time_per_run_seconds"])
@@ -126,7 +125,9 @@ def main() -> None:
             (run_dir / "stdout.log").write_text(exc.stdout or "", encoding="utf-8"); (run_dir / "stderr.log").write_text((exc.stderr or "") + "\nTIMEOUT", encoding="utf-8")
             metadata.update({"timestamp_end": now(), "infra_valid": True, "failure_reason": "agent_timeout", "failure_class": "AGENT_FAILURE"})
             metadata.update(actual_cost(run_dir, pricing["models"][model]))
-        write_json(run_dir / "metadata.json", metadata)
+        if run_dir.exists():
+            generated = read_json(run_dir / "metadata.json") if (run_dir / "metadata.json").exists() else {}
+            write_json(run_dir / "metadata.json", {**metadata, **generated})
         print(f"[{ordinal}/{len(schedule)}] {run_id}")
 
 if __name__ == "__main__": main()
