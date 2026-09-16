@@ -1,0 +1,19 @@
+{
+  "pass": true,
+  "tasks": {
+    "fix-build-agentops": {
+      "pass": true,
+      "sanitized_skill_paths": [],
+      "zero_files": [
+        "manifest.json"
+      ]
+    },
+    "fix-build-google-auto": {
+      "pass": true,
+      "sanitized_skill_paths": [],
+      "zero_files": [
+        "manifest.json"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-09-16T10:09:00+08:00",
+  "python": "3.10.9 | packaged by Anaconda, Inc. | (main, Mar  1 2023, 18:18:15) [MSC v.1916 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "cpu_count": 32,
+  "bench_version": "benchflow 0.6.7",
+  "docker_version": "Docker version 29.2.0, build 0b9d198",
+  "docker_info": null,
+  "benchmark_source": "C:\\Users\\Lenovo\\Desktop\\research\\capability-interaction-mvp\\external\\skillsbench-lf",
+  "skillsbench_commit": "b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af",
+  "line_endings": "LF-only checkout; repository-local core.autocrlf=false",
+  "runner_notes": [
+    "Pass task directories to BenchFlow as absolute WSL paths.",
+    "Set BENCHFLOW_AGENTS_SOURCE=off for a single command; do not persist it.",
+    "No global Git, Docker, Clash, TUN, proxy, or WSL networking setting was changed."
+  ]
+}

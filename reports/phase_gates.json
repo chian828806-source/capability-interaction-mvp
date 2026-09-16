@@ -1,0 +1,7 @@
+{
+  "pilot_passed": false,
+  "negative_candidate": false,
+  "confirmed_candidate": false,
+  "updated_at": null,
+  "rationale": "Initial state: no eligible task audit or pilot has been completed. Do not edit a gate based on a desired result; document the computed evidence and phase review."
+}

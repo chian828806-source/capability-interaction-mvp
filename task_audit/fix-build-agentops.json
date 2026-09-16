@@ -1,0 +1,26 @@
+{
+  "task_id": "fix-build-agentops",
+  "timestamp": "2026-09-16T10:09:00+08:00",
+  "task_path": "C:\\Users\\Lenovo\\Desktop\\research\\capability-interaction-mvp\\external\\skillsbench-lf\\tasks\\fix-build-agentops",
+  "eligible": false,
+  "checks": {
+    "source_present": {
+      "pass": true,
+      "source_commit": "b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af"
+    },
+    "structural_validation": {
+      "pass": true,
+      "benchflow_version": "0.6.7"
+    },
+    "oracle_repeatability": {
+      "pass": false,
+      "reason": "The original CRLF checkout caused a WSL shebang failure; the project-local LF checkout fixed it. The subsequent oracle could not retrieve its golden patch from the external BugSwarm REST API, so no valid oracle score was produced.",
+      "runs": [
+        "runs/oracle-067-agentops-3/2026-09-16__01-24-02/fix-build-agentops__8a240da5",
+        "runs/oracle-067-agentops-4/2026-09-16__01-26-12/fix-build-agentops__38cc322f",
+        "runs/oracle-067-agentops-lf-1/2026-09-16__10-05-54/fix-build-agentops__6e620002"
+      ]
+    }
+  },
+  "known_issue_search": "Manual issue-tracker review remains required before any paid run; this task is ineligible until BugSwarm oracle API reachability is restored and two fresh oracle runs pass."
+}

@@ -1,0 +1,5 @@
+{
+  "pilot": {"id": "gpt-5.4-nano-2026-03-17", "reasoning_setting": "low"},
+  "primary": {"id": "gpt-5.4-mini-2026-03-17", "reasoning_setting": "low"},
+  "secondary": {"id": "gemini-3.8-flash", "thinking_level": "low"}
+}

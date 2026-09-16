@@ -1,0 +1,12 @@
+{
+  "protocol_version": "mvp-1.0",
+  "benchmark": {"repository": "https://github.com/benchflow-ai/skillsbench.git", "tag": "v1.1", "commit_prefix": "b63b7b2", "benchflow": "==0.6.7"},
+  "models": {"pilot": "gpt-5.4-nano-2026-03-17", "primary": "gpt-5.4-mini-2026-03-17", "secondary": "gemini-3.8-flash"},
+  "budget_usd": 15.0,
+  "conditions": ["ZERO", "A", "B", "AB"],
+  "tasks": {
+    "fix-build-agentops": {"skills": ["testing-python", "temporal-python-testing"]},
+    "fix-build-google-auto": {"skills": ["maven-dependency-management", "maven-build-lifecycle"], "requires_strict_verifier_audit": true}
+  },
+  "gates": {"pilot_repetitions": 1, "screening_repetitions": 3, "confirmation_repetitions": 7, "cross_model_repetitions": 5, "candidate_main_effect": 0.2, "candidate_ab_drop": 0.2, "candidate_p_negative": 0.9}
+}

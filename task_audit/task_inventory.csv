@@ -1,0 +1,3 @@
+task_id,skill_A,skill_B,requires_strict_verifier_audit,status
+fix-build-agentops,testing-python,temporal-python-testing,false,pending fixed-checkout audit
+fix-build-google-auto,maven-dependency-management,maven-build-lifecycle,true,pending fixed-checkout audit

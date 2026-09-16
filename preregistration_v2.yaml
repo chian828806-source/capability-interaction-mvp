@@ -1,0 +1,30 @@
+{
+  "protocol_version": "mvp-1.0-replacement-v2",
+  "benchmark": {
+    "repository": "https://github.com/benchflow-ai/skillsbench.git",
+    "tag": "v1.1",
+    "commit": "b63b7b2850226b6aa4fb5929a8c1ac7bc4d9a6af",
+    "benchflow": "==0.6.7"
+  },
+  "task_selection": {
+    "method": "87-task read-only static sweep followed by fresh oracle repeatability",
+    "semantic_external_dependency_policy": "exclude",
+    "bootstrap_dependency_policy": "allow only after stable fresh oracle verification",
+    "stop_condition": "two qualified tasks"
+  },
+  "tasks": {
+    "adaptive-cruise-control": {
+      "skills": {"A": "vehicle-dynamics", "B": "pid-controller"},
+      "oracle_rewards": [1.0, 1.0, 1.0],
+      "verifier_tests_per_run": 12
+    },
+    "hvac-control": {
+      "skills": {"A": "first-order-model-fitting", "B": "imc-tuning-rules"},
+      "oracle_rewards": [1.0, 1.0, 1.0],
+      "verifier_tests_per_run": 7
+    }
+  },
+  "conditions": ["ZERO", "A", "B", "AB"],
+  "status": "READY_FOR_SKILL_PAIR_FREEZE",
+  "paid_model_or_api_runs_started": false
+}
