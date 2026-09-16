@@ -100,7 +100,7 @@ def main() -> None:
         print(f"Dry run: frozen {len(schedule)} runs for {args.phase}; no API call made."); return
     for ordinal, run in enumerate(schedule, 1):
         run_id = f"{run['task_id']}__{model}__{run['condition']}__{run['rep']}"
-        run_dir = ROOT / "runs" / "raw" / run_id; run_dir.mkdir(parents=True, exist_ok=False)
+        run_dir = ROOT / "runs" / "raw" / run_id
         metadata = {"run_id": run_id, "timestamp_start": now(), "phase": args.phase, "task_id": run["task_id"], "skill_condition": run["condition"],
                     "model_provider": config["provider"], "requested_model": model, "reasoning_setting": config["reasoning_setting"], "infra_valid": None,
                     "runner_command": "scripts/run_agent.py", "run_schedule_order": ordinal}

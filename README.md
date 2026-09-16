@@ -52,10 +52,10 @@ Qualification evidence and selection rationale are in
 `reports/TASK_REPLACEMENT_AUDIT.md` and `reports/TASK_CANDIDATE_SWEEP.md`.
 Do not start a paid Pilot until the skill-pair freeze is explicitly reviewed.
 
-The model runner command is deliberately supplied through the environment
-variable `MVP_RUNNER_TEMPLATE`, rather than hard-coded.  It must use the same
-provider-agnostic harness for all conditions within a model comparison.  Its
-available substitutions are documented in `configs/experiment.yaml`.
+The fixed runner is `scripts/run_agent.py`, which invokes BenchFlow's
+`opencode` ACP harness in a fresh Docker sandbox with the selected condition
+directory. API configuration is read only from `API_BASE_URL`, `API_KEY`, and
+`PILOT_MODEL`; no key belongs in the repository.
 
 ## Analysis
 

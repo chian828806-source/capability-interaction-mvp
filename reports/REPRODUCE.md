@@ -15,10 +15,10 @@ qualified task.
 
 Do not proceed to a paid Pilot without explicit review. Populate the provider's
 same-day prices in `configs/pricing_snapshot.json` and supply `API_BASE_URL`
-and `API_KEY` only as environment variables. Define `MVP_RUNNER_TEMPLATE` for
-the reviewed provider-agnostic BenchFlow/OpenCode harness, then execute the
-appropriate phase script. Each phase is scheduled deterministically and frozen
-before execution. Finally:
+and `API_KEY` only as environment variables, set `PILOT_MODEL`, and use the
+fixed `scripts/run_agent.py` BenchFlow/OpenCode ACP harness through the phase
+scripts. Each phase is scheduled deterministically and frozen before execution.
+Finally:
 
 ```text
 python scripts/collect_results.py
