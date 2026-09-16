@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+FINAL_PREREGISTRATION = ROOT / "preregistration_final.yaml"
 
 def now() -> str:
     return datetime.now(timezone.utc).isoformat()

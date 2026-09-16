@@ -1,6 +1,7 @@
 # Protocol deviations
 
-No deviations have been approved or executed.
+This log contains approved, dated preflight adaptations. It is append-only:
+historical observations below are retained even when later superseded.
 
 ## Preflight observation — 2026-09-15
 

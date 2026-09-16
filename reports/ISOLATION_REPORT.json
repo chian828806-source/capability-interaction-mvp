@@ -1,19 +1,100 @@
 {
   "pass": true,
   "tasks": {
-    "fix-build-agentops": {
+    "adaptive-cruise-control": {
       "pass": true,
       "sanitized_skill_paths": [],
       "zero_files": [
         "manifest.json"
-      ]
+      ],
+      "container_filesystem": {
+        "ZERO": {
+          "expected": [],
+          "exposed": [],
+          "pass": true,
+          "returncode": 0
+        },
+        "A": {
+          "expected": [
+            "vehicle-dynamics"
+          ],
+          "exposed": [
+            "vehicle-dynamics"
+          ],
+          "pass": true,
+          "returncode": 0
+        },
+        "B": {
+          "expected": [
+            "pid-controller"
+          ],
+          "exposed": [
+            "pid-controller"
+          ],
+          "pass": true,
+          "returncode": 0
+        },
+        "AB": {
+          "expected": [
+            "vehicle-dynamics",
+            "pid-controller"
+          ],
+          "exposed": [
+            "pid-controller",
+            "vehicle-dynamics"
+          ],
+          "pass": true,
+          "returncode": 0
+        }
+      }
     },
-    "fix-build-google-auto": {
+    "hvac-control": {
       "pass": true,
       "sanitized_skill_paths": [],
       "zero_files": [
         "manifest.json"
-      ]
+      ],
+      "container_filesystem": {
+        "ZERO": {
+          "expected": [],
+          "exposed": [],
+          "pass": true,
+          "returncode": 0
+        },
+        "A": {
+          "expected": [
+            "first-order-model-fitting"
+          ],
+          "exposed": [
+            "first-order-model-fitting"
+          ],
+          "pass": true,
+          "returncode": 0
+        },
+        "B": {
+          "expected": [
+            "imc-tuning-rules"
+          ],
+          "exposed": [
+            "imc-tuning-rules"
+          ],
+          "pass": true,
+          "returncode": 0
+        },
+        "AB": {
+          "expected": [
+            "first-order-model-fitting",
+            "imc-tuning-rules"
+          ],
+          "exposed": [
+            "first-order-model-fitting",
+            "imc-tuning-rules"
+          ],
+          "pass": true,
+          "returncode": 0
+        }
+      }
     }
-  }
+  },
+  "container_check": "docker bind-mount"
 }

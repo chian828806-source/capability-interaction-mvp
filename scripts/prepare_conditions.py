@@ -2,7 +2,7 @@
 from __future__ import annotations
 import shutil
 from pathlib import Path
-from common import ROOT, copy_tree, file_manifest, read_json, tree_hash, write_json
+from common import FINAL_PREREGISTRATION, ROOT, copy_tree, file_manifest, read_json, tree_hash, write_json
 
 def clean_task(source: Path, destination: Path) -> None:
     copy_tree(source, destination)
@@ -30,7 +30,7 @@ def condition(task_id: str, source_task: Path, skills: list[str]) -> None:
         "removed_path": "environment/skills", "source_task": str(source_task)})
 
 def main() -> None:
-    pre = read_json(ROOT / "preregistration.yaml"); source = ROOT / "external" / "skillsbench-lf" / "tasks"
+    pre = read_json(FINAL_PREREGISTRATION); source = ROOT / "external" / "skillsbench-lf" / "tasks"
     if not source.is_dir(): raise SystemExit("Pinned SkillsBench source is absent; clone it before preparing conditions.")
     for task_id, spec in pre["tasks"].items(): condition(task_id, source / task_id, spec["skills"])
     print("Sanitized task copies and condition manifests created.")
